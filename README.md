@@ -50,12 +50,13 @@ Este é um projeto Single Page Application (SPA) desenvolvido em **Blazor** com 
    dotnet run
 
 ## Estrutura do Projeto
-    ```bash
-    /Pages           - Componentes Razor das páginas
-    /Data            - Contexto do banco e classes de migração
-    /Models          - Classes do domínio (Category, Product, etc)
-    /wwwroot         - Arquivos estáticos (CSS, JS)
-    /Program.cs      - Configuração e inicialização da aplicação
+   ```
+      /Pages           - Componentes Razor das páginas
+      /Data            - Contexto do banco e classes de migração
+      /Models          - Classes do domínio (Category, Product, etc)
+      /wwwroot         - Arquivos estáticos (CSS, JS)
+      /Program.cs      - Configuração e inicialização da aplicação
+   ```
 
 ## Contribuições
 Contribuições são bem vindas! Sinta-se à vontade para abrir issues ou pull requests.
