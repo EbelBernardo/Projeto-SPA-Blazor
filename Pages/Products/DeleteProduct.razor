@@ -1,0 +1,50 @@
+﻿@page "/products/delete/{id:int}"
+@inject AppDbContext context
+@inject NavigationManager navigations
+
+<h1>Delete: @model!.Title</h1>
+
+<EditForm Model="model" OnValidSubmit="HandleSubmitAsync">
+
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class="mb-3">
+		<label for="Title" class="form-label"><b>Title</b></label>
+		<InputText readonly id="Title" type="text" class="form-control" @bind-Value=@model.Title/>
+	</div>
+	<div class="mb-3">
+		<label for="Price" class="form-label"><b>Price</b></label>
+		<InputNumber readonly id="Price" type="number" class="form-control" @bind-Value=@model.Price/>
+	</div>
+
+	<button class="btn btn-danger" type="submit"><b>Delete</b></button>
+	<a class="btn btn-primary" href="/products"><b>Cancel</b></a>
+</EditForm>
+
+@code
+{
+	[Parameter]
+	public int id { get; set; }
+
+	Product? model = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		model = await context.Products.FindAsync(id);
+		if(model is null)
+			navigations.NavigateTo("/products");
+	}
+
+	async Task HandleSubmitAsync()
+	{
+		var productToDelete = await context.Products.FindAsync(id);
+		if (productToDelete is not null)
+		{
+			context.Products.Remove(productToDelete);
+			await context.SaveChangesAsync();
+		}
+
+		navigations.NavigateTo("/products");
+	}
+}

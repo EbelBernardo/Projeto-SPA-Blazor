@@ -1,0 +1,67 @@
+﻿@page "/products/update/{id:int}"
+@using Microsoft.EntityFrameworkCore
+@inject AppDbContext context
+@inject NavigationManager navigations
+
+<h1>Update: @model.Title</h1>
+
+<EditForm Model="model" OnValidSubmit="HandleSubmitAsync">
+
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class="mb-3">
+		<label for="Title" class="form-label"><b>Title</b></label>
+		<InputText id="Title" class="form-control" type="text" @bind-Value=@model.Title/>
+	</div>
+	<div class="mb-3">
+		<label for="Price" class="form-label"><b>Price</b></label>
+		<InputNumber id="Price" class="form-control" type="number" @bind-Value=@model.Price/>
+	</div>
+	<div class="mb-3">
+		<label for="CategoryId" class="form-label"><b>Title</b>Category</label>
+		<InputSelect id="CategoryId" class="form-control" @bind-Value=@model.CategoryId>
+			@foreach(var category in categories)
+			{
+				<option value="@category.Id">@category.Title</option>
+			}
+		</InputSelect>
+	</div>
+
+	<button class="btn btn-success" type="submit"><b>Update</b></button>
+</EditForm>
+
+@code
+{
+	[Parameter]
+	public int id { get; set; }
+
+	Product model = new();
+	List<Category> categories = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		categories = await context.Categories.AsNoTracking().ToListAsync();
+
+		var productFromDb = await context.Products.FindAsync(id);
+		if(productFromDb != null)
+			model = productFromDb;
+		else
+			navigations.NavigateTo("/products");
+	}
+
+	async Task HandleSubmitAsync()
+	{
+		var productUpdated = await context.Products.FindAsync(id);
+		if (productUpdated is null)
+			return;
+
+		productUpdated.Title = model.Title;
+		productUpdated.Price = model.Price;
+		productUpdated.CategoryId = model.CategoryId;
+
+		await context.SaveChangesAsync();
+
+		navigations.NavigateTo("/products");
+	}
+}

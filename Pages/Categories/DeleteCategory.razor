@@ -1,0 +1,45 @@
+﻿@page "/categories/delete/{id:int}"
+@inject AppDbContext context
+@inject NavigationManager navigationManager
+
+<h1>Delete: @model!.Title</h1>
+
+<EditForm Model="model" OnValidSubmit="HandleSubmitAsync">
+
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class="mb-3">
+		<label for="Title" class="form-label"><b>Title</b></label>
+		<InputText readonly id="Title" class="form-control" type="text" @bind-Value=@model.Title/>
+	</div>
+
+	<button class="btn btn-danger" type="submit"><b>Delete</b></button>
+</EditForm>
+
+@code
+{
+	[Parameter]
+	public int id { get; set; }
+
+	Category? model = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		model = await context.Categories.FindAsync(id);
+		if(model is null)
+			navigationManager.NavigateTo("/categories");
+	}
+
+	async Task HandleSubmitAsync()
+	{
+		var categorytoDelete = await context.Categories.FindAsync(id);
+		if (categorytoDelete is null)
+			return;
+
+		context.Categories.Remove(categorytoDelete);
+		await context.SaveChangesAsync();
+
+		navigationManager.NavigateTo("/categories");
+	}
+}

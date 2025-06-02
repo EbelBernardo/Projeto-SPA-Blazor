@@ -1,0 +1,45 @@
+﻿@page "/products"
+@using Microsoft.EntityFrameworkCore
+@using System.Globalization
+@inject AppDbContext context
+
+<h1>Products</h1>
+
+<a class="btn btn-primary" href="/products/create"><b>Create</b></a>
+
+<table class="table">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Title</td>
+			<td>Price</td>
+			<td>Category</td>
+			<td>Actions</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var product in products)
+		{
+			<tr>
+				<td>@product.Id</td>
+				<td>@product.Title</td>
+				<td>@product.Price.ToString("C", new CultureInfo("pt-BR"))</td>
+				<td>
+					<a class="btn btn-primary" href="/products/update/@product.Id"><b>Update</b></a>
+					<a class="btn btn-danger" href="/products/delete/@product.Id"><b>Delete</b></a>
+				</td>
+				<td>@product.Category.Title</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@code
+{
+	List<Product> products = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		products = await context.Products.Include(p=> p.Category).AsNoTracking().ToListAsync();
+	}
+}
