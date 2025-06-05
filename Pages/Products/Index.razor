@@ -3,6 +3,8 @@
 @using System.Globalization
 @inject AppDbContext context
 
+<PageTitle>Products</PageTitle>
+
 <h1>Products</h1>
 
 <a class="btn btn-primary" href="/products/create"><b>Create</b></a>
@@ -24,11 +26,11 @@
 				<td>@product.Id</td>
 				<td>@product.Title</td>
 				<td>@product.Price.ToString("C", new CultureInfo("pt-BR"))</td>
+				<td>@product.Category.Title</td>
 				<td>
 					<a class="btn btn-primary" href="/products/update/@product.Id"><b>Update</b></a>
 					<a class="btn btn-danger" href="/products/delete/@product.Id"><b>Delete</b></a>
 				</td>
-				<td>@product.Category.Title</td>
 			</tr>
 		}
 	</tbody>

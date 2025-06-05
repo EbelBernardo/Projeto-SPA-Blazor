@@ -8,19 +8,19 @@ namespace Projeto_SPA_Blazor.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "O Título é obrigatório")]
-        [MaxLength(100, ErrorMessage = "O Título deve ter no máximo 100 caracteres")]
-        [MinLength(3, ErrorMessage = "O Título deve ter no mínimo 3 caracteres")]
+        [Required(ErrorMessage = "Title is required")]
+        [MaxLength(100, ErrorMessage = "Title must have a maximum of 100 characteres")]
+        [MinLength(3, ErrorMessage = "Title must have a minimum of 3 characteres")]
         public string Title { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "O Preço é obrigatório")]
+        [Required(ErrorMessage = "Price is required")]
         [DataType(DataType.Currency)]
-        [Range(1, 10000, ErrorMessage = "O Preço deve ser entre 1 e 10000")]
+        [Range(1, 10000, ErrorMessage = "Price must be between 1 and 10000")]
         [Precision(7, 2)]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "A Categoria é obrigatória")]
-        [Range(1, 10000, ErrorMessage = "A Categoria deve ser entre 1 e 10000")]
+        [Required(ErrorMessage = "Category is required")]
+        [Range(1, 10000, ErrorMessage = "Category must be chosen")]
         public int CategoryId { get; set; }
 
         public Category Category { get; set; } = null!;

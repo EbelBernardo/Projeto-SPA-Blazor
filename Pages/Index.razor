@@ -1,9 +1,61 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container mt-5">
+    <h1 class="display-4 mb-4 text-primary">Home</h1>
 
-Welcome to your new app.
+    <div class="mb-5">
+        <h3 class="mb-3">How to navigate the system</h3>
+        <p class="lead">At the top of the screen, you will see the system name: <strong>Projeto-SPA-Blazor</strong>.</p>
+        <p>Next to it, there is a navigation menu with the following items:</p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item ps-0"><strong>Home:</strong> The system's home page.</li>
+            <li class="list-group-item ps-0"><strong>Products:</strong> List of registered products.</li>
+            <li class="list-group-item ps-0"><strong>Categories:</strong> List of product categories.</li>
+        </ul>
+        <p class="mt-3">You can click any of these items to navigate between sections</p>
+    </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <div class="mb-5">
+        <h3 class="mb-3">How to use the <span class="text-primary">Products</span> page</h3>
+        <p class="lead">The <strong>Products</strong> page displays a table with all registered products in the system.</p>
+
+        <h5>What you will see:</h5>
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item ps-0"><strong>ID:</strong> The product identifier.</li>
+            <li class="list-group-item ps-0"><strong>Title:</strong> The name of the product.</li>
+            <li class="list-group-item ps-0"><strong>Price:</strong> Price formatted in Brazilian reais (R$).</li>
+            <li class="list-group-item ps-0"><strong>Category:</strong> The category to which the product belongs.</li>
+            <li class="list-group-item ps-0"><strong>Actions:</strong> Buttons to edit or delete the product.</li>
+        </ul>
+
+        <h5><strong>What you can do:</strong></h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item ps-0"><strong>Create a new product:</strong> Click the <span class="badge bg-primary">Create</span> button at the top of the page.</li>
+            <li class="list-group-item ps-0"><strong>Edit a product:</strong> Click <span class="badge bg-primary">Update</span> next to the desired product.</li>
+            <li class="list-group-item ps-0"><strong>Delete a product:</strong> Click <span class="badge bg-danger">Delete</span> to remove it from the system.</li>
+        </ul>
+
+    </div>
+
+	<div class="mb-4">
+        <h3>How to use the <span class="text-primary">Categories</span> page</h3>
+        <p class="lead">The <strong>Categories</strong> page displays a table with all registered products in the system.</p>
+
+        <h5><strong>What you will see:</strong></h5>
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item ps-0"><strong>ID:</strong> The category identifier.</li>
+            <li class="list-group-item ps-0"><strong>Title:</strong> The name of the category.</li>
+            <li class="list-group-item ps-0"><strong>Actions:</strong> Buttons to edit or delete the category.</li>
+        </ul>
+
+        <h5><strong>What you can do:</strong></h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item ps-0"><strong>Create a new category:</strong> Click the <span class="badge bg-primary">Create</span> button at the top of the page.</li>
+            <li class="list-group-item ps-0"><strong>Edit a category:</strong> Click <span class="badge bg-primary">Update</span> next to the desired category.</li>
+            <li class="list-group-item ps-0"><strong>Delete a category:</strong> Click <span class="badge bg-danger">Delete</span> to remove it from the system.</li>
+        </ul>
+
+    </div>
+</div>
